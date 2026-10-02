@@ -5,8 +5,7 @@
 
 #show: registrationCertificate.with(
   author: author,
-  title: titleGerman,
-  birthdate: birthdate,
+  title: titleGreek,
   degree: degree,
   program: program,
   examiner: examiner,

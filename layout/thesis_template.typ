@@ -11,19 +11,22 @@
 
 #let thesis(
   title: "",
-  titleGerman: "",
+  titleGreek: "",
   degree: "",
   program: "",
   examiner: "",
   supervisors: (),
   author: "",
-  startDate: datetime,
-  submissionDate: datetime,
+  startDate: none,
+  submissionDate: none,
   abstract_en: "",
-  abstract_de: "",
+  abstract_el: "",
   acknowledgement: "",
   transparency_ai_tools: "",
   is_print: false,
+  division: "",
+  committee: (),
+  city: "Athens",
   body,
 ) = {
   cover(
@@ -31,20 +34,32 @@
     degree: degree,
     program: program,
     author: author,
+    division: division,
+    supervisors: supervisors,
+    submissionDate: submissionDate,
+    city: city,
   )
 
+  pagebreak()
+  
+  // Blank page
+  []
+  
   pagebreak()
 
   titlepage(
     title: title,
-    titleGerman: titleGerman,
+    titleGreek: titleGreek,
     degree: degree,
     program: program,
     examiner: examiner,
     supervisors: supervisors,
     author: author,
     startDate: startDate,
-    submissionDate: submissionDate
+    submissionDate: submissionDate,
+    division: division,
+    committee: committee,
+    city: city,
   )
 
   print_page_break(print: is_print, to: "even")
@@ -64,7 +79,7 @@
   print_page_break(print: is_print)
 
   abstract(lang: "en")[#abstract_en]
-  abstract(lang: "de")[#abstract_de]
+  abstract(lang: "el")[#abstract_el]
 
   set page(
     margin: (left: 30mm, right: 30mm, top: 40mm, bottom: 40mm),

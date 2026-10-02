@@ -1,13 +1,13 @@
 # thesis-template-typst
-This repository provides a comprehensive Typst template for writing your Bachelor's or Master's thesis at the CIT School of TUM (Technical University of Munich). It includes two types of documents: a proposal template and a thesis template, both specifically designed for students in the field of Informatics. For more information about writing a thesis at the CIT School, please visit the [official CIT website](https://www.cit.tum.de/en/cit/studies/students/thesis-completing-your-studies/informatics/).
+This repository provides a Typst template adapted for writing a Bachelor's or Master's thesis at the National Technical University of Athens (NTUA). It includes a proposal template and a thesis template, suitable for students in the School of Electrical and Computer Engineering. The wording and default labels have been switched to Greek to support local academic usage.
 
 > [!IMPORTANT]
-> This is only a template. You have to adapt the template to your thesis and discuss the structure of your thesis with your supervisor(s)!
+> This is only a template. You still need to adapt it to your thesis and discuss the structure with your supervisor(s)!
 
 
 ## Guidelines 
 > [!TIP]
-> __Please thoroughly read our guidelines and hints on [Outline](https://outline.aet.cit.tum.de/doc/thesis-XCYjpC8q1a)!__ (TUM Login Required) 
+> Please thoroughly read the guidelines for writing a thesis at NTUA and discuss the structure with your supervisor(s)! 
 
 
 ## Installation
@@ -35,9 +35,9 @@ You can use this repository as a template for your thesis. To do this, follow th
 Fill in your thesis details in the [`metadata.typ`](/metadata.typ) file: 
 * Degree (Bachelor or Master)
 * Your study program
-* English and German title
+* English and Greek title
 * Examiner and supervisor(s)
-* Your name (without e-mail address or matriculation number)
+* Your name
 * The start and submission date
 
 ### Choose Reference Format

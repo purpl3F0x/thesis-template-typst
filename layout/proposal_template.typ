@@ -8,28 +8,33 @@
 // Go ahead and customize it to your liking!
 #let proposal(
   title: "",
-  titleGerman: "",
+  titleGreek: "",
   degree: "",
   program: "",
   examiner: "",
   supervisors: (),
   author: "",
-  startDate: datetime,
-  submissionDate: datetime,
+  startDate: none,
+  submissionDate: none,
   transparency_ai_tools: "",
   is_print: false,
+  division: "",
+  committee: (),
+  city: "Athens",
   body,
 ) = {
   titlepage(
     title: title,
-    titleGerman: titleGerman,
+    titleGreek: titleGreek,
     degree: degree,
     program: program,
     examiner: examiner,
     supervisors: supervisors,
     author: author,
     startDate: startDate,
-    submissionDate: submissionDate
+    submissionDate: submissionDate,
+    division: division,
+    committee: committee,
   )
 
   print_page_break(print: is_print)

@@ -3,7 +3,6 @@
 
 #let registrationCertificate(
   author: "",
-  birthdate: datetime,
   title: "",
   degree: "",
   program: "",
@@ -23,7 +22,7 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: "en"
+    lang: "el"
   )
 
   align(
@@ -31,28 +30,28 @@
     stack(
       dir: ttb,
       spacing: 10pt,
-      image("/figures/tum_logo.png", width: 20%),
-      text(font: fonts.sans, weight: "bold", "Technical University \n of Munich")
+      image("/figures/ntua_logo.svg", width: 15%),
+      text(font: fonts.sans, weight: "bold", "Εθνικό Μετσόβιο Πολυτεχνείο")
     )
   )
 
   v(1.5cm)
   
-  align(left, text(font: fonts.sans, 1.3em, weight: "bold", "Bestätigung zur Anmeldung der " + degree + "arbeit"))
+  let degreeLabel = if degree == "Bachelor" { "πτυχιακής" } else { "διπλωματικής" }
+  align(left, text(font: fonts.sans, 1.3em, weight: "bold", "Βεβαίωση εγγραφής της " + degreeLabel + " εργασίας"))
 
   grid(
     columns: 2,
     row-gutter: 10mm,
     column-gutter: 6mm,
-    formField("Name der/des Studierenden", author, length: 90%),
-    formField("Geburtsdatum", birthdate.display("[day].[month].[year]"),length: 90%),
-    formField("Studiengang", program, length: 90%),
-    formField("Titel der Arbeit", title, length: 90%)
+    formField("Όνομα/επώνυμο φοιτητή/τριας", author, length: 90%),
+    formField("Πρόγραμμα σπουδών", program, length: 90%),
+    formField("Τίτλος εργασίας", title, length: 90%)
   )
 
   v(1.5cm)
 
-  "Hiermit bestätigen wir, dass der Kandidat/die Kandidatin sich am " + startDate.display("[day].[month].[year]") + " zur " + degree + "arbeit angemeldet hat. \n"
+  "Με το παρόν βεβαιώνουμε ότι ο/η υποψήφιος/α έχει εγγραφεί στις " + startDate.display("[day].[month].[year]") + " για τη " + degreeLabel + " εργασία. \n"
   body
 
   v(1.5cm)
@@ -60,7 +59,7 @@
   grid(
     columns: 2,
     column-gutter: 2cm,
-    formField("Datum", currentDate.display("[day].[month].[year]"), length: 90%),
+    formField("Ημερομηνία", currentDate.display("[day].[month].[year]"), length: 90%),
     formField(examiner, " ", length: 90%)
   )
 }

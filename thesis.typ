@@ -5,7 +5,7 @@
 
 #show: thesis.with(
   title: titleEnglish,
-  titleGerman: titleGerman,
+  titleGreek: titleGreek,
   degree: degree,
   program: program,
   examiner: examiner,
@@ -14,9 +14,12 @@
   startDate: startDate,
   submissionDate: submissionDate,
   abstract_en: include "/content/abstract_en.typ",
-  abstract_de: include "/content/abstract_de.typ",
+  abstract_el: include "/content/abstract_el.typ",
   acknowledgement: include "/content/acknowledgement.typ",
   transparency_ai_tools: include "/content/transparency_ai_tools.typ",
+  division: division,
+  committee: committee,
+  city: location,
 )
 
 #include "/content/introduction.typ"

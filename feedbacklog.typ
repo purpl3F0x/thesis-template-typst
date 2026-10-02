@@ -9,7 +9,7 @@
   examiner: examiner,
   supervisors: supervisors,
   author: author,
-  presentationDate: presentationDate,
+  presentationDate: submissionDate,
   feedbacklogSubmissionDate: feedbacklogSubmissionDate,
 )
 

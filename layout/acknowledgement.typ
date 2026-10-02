@@ -10,7 +10,7 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: "en"
+    lang: "el"
   )
 
   set par(
@@ -19,7 +19,7 @@
   )
   
   // --- Acknowledgements ---
-  align(left, text(font: fonts.sans, 2em, weight: 700,"Acknowledgements"))
+  align(left, text(font: fonts.sans, 2em, weight: 700,"Ευχαριστίες"))
   v(15mm)
 
   body

@@ -1,67 +1,119 @@
 #import "/layout/fonts.typ": *
-#import "/layout/titlepage_table.typ": render-title-table
 
 #let titlepage(
   title: "",
-  titleGerman: "",
+  titleGreek: "",
   degree: "",
   program: "",
   examiner: "",
   supervisors: (),
   author: "",
-  startDate: datetime,
-  submissionDate: datetime,
+  startDate: none,
+  submissionDate: none,
+  division: "Division",
+  committee: (),
+  city: "Athens",
 ) = {
   // Quality checks
   assert(degree in ("Bachelor", "Master"), message: "The degree must be either 'Bachelor' or 'Master'")
-  
+
   set page(
-    margin: (left: 20mm, right: 20mm, top: 30mm, bottom: 30mm),
+    margin: (left: 25mm, right: 25mm, top: 20mm, bottom: 25mm),
     numbering: none,
     number-align: center,
   )
 
   set text(
-    font: fonts.body, 
-    size: 12pt, 
-    lang: "en"
+    font: fonts.body,
+    size: 11pt,
+    lang: "en",
   )
 
-  set par(leading: 0.5em)
+  set par(leading: 1em)
 
-  
-  // --- Title Page ---
-  v(1cm)
-  align(center, image("/figures/tum_logo.png", width: 26%))
+  // --- Title Page (NTUA Format) ---
 
-  v(5mm)
-  align(center, text(font: fonts.sans, 2em, weight: 700, "Technical University of Munich"))
+  // Header with logo and university info
+  grid(
+    columns: (45mm, 1fr),
+    gutter: 0mm,
+    align: center,
+    align(center, image("/figures/ntua_logo.svg", width: 30mm)),
+    align(left + horizon, block(width: 100%)[
+      #set text(top-edge: 2pt)
+      #text(font: fonts.sans, size: 12pt, "National Technical University of Athens")
 
-  v(5mm)
-  align(center, text(font: fonts.sans, 1.5em, weight: 100, "School of Computation, Information and Technology \n -- Informatics --"))
-  
+      #text(font: fonts.sans, size: 12pt, "School of Electrical and Computer Engineering")
+
+      #text(size: 12pt, "Division: " + division)
+    ]),
+  )
+
+  v(25mm)
+
+  // Title of Thesis label
+  align(center, text(font: fonts.sans, weight: 700, size: 16pt, underline(title)))
+
+  v(10mm)
+
+  // Degree label and Thesis Title
+  align(center, text(font: fonts.sans, size: 16pt, weight: 700, "Diploma Thesis"))
+
+  v(10mm)
+
+  // Author label and name
+  align(center, text(font: fonts.sans, weight: 400, size: 14pt, underline(author)))
+
+  v(20mm)
+
+  // Supervisor section
+  if supervisors.len() > 0 {
+    let supervisor = supervisors.at(0)
+    grid(
+      columns: (auto, 1fr),
+      column-gutter: 0.3em,
+      row-gutter: 0.9em,
+      text(size: 12pt, "Supervisor: "), text(size: 12pt, supervisor.at("name", default: "Full Name") + ","),
+      [], text(size: 12pt, supervisor.at("status", default: "Status, University")),
+    )
+  }
+
+  v(10mm)
+
+  // Committee approval
+  align(left, text(
+    size: 10pt,
+    "Approved by the three-member scientific committee on " + underline(submissionDate.display("[day] [month] [year]")),
+  ))
+
+  v(8mm)
+
+  // Signature lines for committee members (dotted)
+  let committee_display = if committee.len() > 0 {
+    committee
+  } else {
+    (
+      (name: "Full name", status: "Status, University"),
+      (name: "Full name", status: "Status, University"),
+      (name: "Full name", status: "Status, University"),
+    )
+  }
+
+  grid(
+    columns: (1fr, 1fr, 1fr),
+    gutter: 10mm,
+    ..committee_display.map(member => align(center, [
+      #text(size: 10pt, "." * 36)
+      #v(3mm)
+      #text(size: 10pt, align(
+        center,
+        member.at("name", default: "Full name") + "\n" + member.at("status", default: "Status, University"),
+      ))
+    ]))
+  )
+
   v(15mm)
 
-  align(center, text(font: fonts.sans, 1.3em, weight: 100, degree + "’s Thesis in " + program))
-  v(8mm)
-  
-
-  align(center, text(font: fonts.sans, 2em, weight: 700, title))
-  
-
-  align(center, text(font: fonts.sans, 2em, weight: 500, titleGerman))
-
-  let entries = ()
-  entries.push(("Author", author))
-  entries.push(("Examiner", examiner))
-  // Only show supervisors if there are any
-  if supervisors.len() > 0 {
-    let supervisorField = "Supervisor" + if supervisors.len() > 1 [s]
-    entries.push((supervisorField, supervisors.join(", ")))
-  }
-  entries.push(("Start Date", startDate.display("[day].[month].[year]")))
-  entries.push(("Submission Date", submissionDate.display("[day].[month].[year]")))
-
-  v(1cm)
-  render-title-table(entries)
+  let cityDateStr = if submissionDate != none { city + ", " + submissionDate.display("[month repr:long] [year]") } else { city + ", Month Year" }
+  align(center, text(size: 11pt, cityDateStr))
 }

@@ -6,7 +6,7 @@
 
 #show: proposal.with(
   title: titleEnglish,
-  titleGerman: titleGerman,
+  titleGreek: titleGreek,
   degree: degree,
   program: program,
   examiner: examiner,
@@ -15,11 +15,13 @@
   startDate: startDate,
   submissionDate: submissionDate,
   transparency_ai_tools: include "/content/proposal/transparency_ai_tools.typ",
+  division: division,
+  committee: committee,
+  city: location,
 )
 
 #TODO(color: red)[ // Remove this block
-  Before you start with your thesis, have a look at our guides on Outline!
-  #link("https://outline.aet.cit.tum.de/doc/proposal-ocozQUn1RU")
+  Before you start with your thesis, discuss the structure and requirements with your supervisor!
 ]
 
 #set heading(numbering: none)
