@@ -1,4 +1,5 @@
 #import "/layout/fonts.typ": *
+#import "/layout/i18n.typ": *
 
 #let titlepage(
   title: "",
@@ -13,6 +14,7 @@
   division: "Division",
   committee: (),
   city: "Athens",
+  lang: "en",
 ) = {
   
   set page(
@@ -24,7 +26,7 @@
   set text(
     font: fonts.body,
     size: 11pt,
-    lang: "en",
+    lang: lang,
   )
 
   set par(leading: 1em)
@@ -39,11 +41,11 @@
     align(center, image("/figures/ntua_logo.svg", width: 30mm)),
     align(left + horizon, block(width: 100%)[
       #set text(top-edge: 2pt)
-      #text(font: fonts.sans, size: 12pt, "National Technical University of Athens")
+      #text(font: fonts.sans, size: 12pt, tr(lang, "university"))
 
-      #text(font: fonts.sans, size: 12pt, "School of Electrical and Computer Engineering")
+      #text(font: fonts.sans, size: 12pt, tr(lang, "school"))
 
-      #text(size: 12pt, "Division: " + division)
+      #text(size: 12pt, tr(lang, "division-prefix") + division)
     ]),
   )
 
@@ -55,7 +57,7 @@
   v(10mm)
 
   // Degree label and Thesis Title
-  align(center, text(font: fonts.sans, size: 16pt, weight: 700, "Diploma Thesis"))
+  align(center, text(font: fonts.sans, size: 16pt, weight: 700, tr(lang, "thesis")))
 
   v(10mm)
 
@@ -71,7 +73,7 @@
       columns: (auto, 1fr),
       column-gutter: 0.3em,
       row-gutter: 0.9em,
-      text(size: 12pt, "Supervisor: "), text(size: 12pt, supervisor.at("name", default: "Full Name") + ","),
+      text(size: 12pt, tr(lang, "supervisor")), text(size: 12pt, supervisor.at("name", default: "Full Name") + ","),
       [], text(size: 12pt, supervisor.at("status", default: "Status, University")),
     )
   }
@@ -81,7 +83,7 @@
   // Committee approval
   align(left, text(
     size: 10pt,
-    "Approved by the three-member scientific committee on " + underline(submissionDate.display("[day] [month] [year]")),
+    tr(lang, "approved") + underline(day-month-year(submissionDate, lang)),
   ))
 
   v(8mm)
@@ -112,6 +114,5 @@
 
   v(15mm)
 
-  let cityDateStr = if submissionDate != none { city + ", " + submissionDate.display("[month repr:long] [year]") } else { city + ", Month Year" }
-  align(center, text(size: 11pt, cityDateStr))
+  align(center, text(size: 11pt, city + ", " + month-year(submissionDate, lang)))
 }

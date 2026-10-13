@@ -6,6 +6,7 @@
 #import "/layout/abstract.typ": *
 #import "/utils/print_page_break.typ": *
 #import "/layout/fonts.typ": *
+#import "/layout/i18n.typ": *
 #import "/utils/diagram.typ": in-outline
 #import "../utils/fr_qa_c.typ": fr_counter, qa_counter, const_counter
 
@@ -27,10 +28,14 @@
   division: "",
   committee: (),
   city: "Athens",
+  lang: "en",
   body,
 ) = {
+  // The cover and the title page show the title in the language of the thesis
+  let mainTitle = if lang == "el" and titleGreek != "" { titleGreek } else { title }
+
   cover(
-    title: title,
+    title: mainTitle,
     degree: degree,
     program: program,
     author: author,
@@ -38,6 +43,7 @@
     supervisors: supervisors,
     submissionDate: submissionDate,
     city: city,
+    lang: lang,
   )
 
   pagebreak()
@@ -48,7 +54,7 @@
   pagebreak()
 
   titlepage(
-    title: title,
+    title: mainTitle,
     titleGreek: titleGreek,
     degree: degree,
     program: program,
@@ -60,6 +66,7 @@
     division: division,
     committee: committee,
     city: city,
+    lang: lang,
   )
 
   print_page_break(print: is_print, to: "even")
@@ -68,18 +75,25 @@
     title: title,
     degree: degree,
     author: author,
-    submissionDate: submissionDate
+    submissionDate: submissionDate,
+    lang: lang,
   )
   transparency_ai_tools_layout(transparency_ai_tools)
 
   print_page_break(print: is_print)
   
-  acknowledgement_layout(acknowledgement)
+  acknowledgement_layout(acknowledgement, title: tr(lang, "acknowledgement"))
 
   print_page_break(print: is_print)
 
-  abstract(lang: "en")[#abstract_en]
-  abstract(lang: "el")[#abstract_el]
+  // The abstract in the language of the thesis comes first
+  if lang == "el" {
+    abstract(lang: "el")[#abstract_el]
+    abstract(lang: "en")[#abstract_en]
+  } else {
+    abstract(lang: "en")[#abstract_en]
+    abstract(lang: "el")[#abstract_el]
+  }
 
   set page(
     margin: (left: 30mm, right: 30mm, top: 40mm, bottom: 40mm),
@@ -90,8 +104,14 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: "en"
+    lang: lang
   )
+
+  // Labels in the language of the thesis. Typst 0.13+ knows the Greek ones,
+  // Typst 0.12 does not, so they are set here explicitly.
+  show figure.where(kind: image): set figure(supplement: tr(lang, "figure"))
+  show figure.where(kind: table): set figure(supplement: tr(lang, "table"))
+  set smartquote(quotes: tr(lang, "quotes"))
   
   show math.equation: set text(weight: 400)
 
@@ -105,7 +125,7 @@
     if el != none and el.func() == heading and el.level == 1 {
       link(
         el.location(),
-        [Chapter #numbering(
+        [#tr(lang, "chapter") #numbering(
           el.numbering,
           ..counter(heading).at(el.location())
         )]
@@ -151,7 +171,7 @@
   }
   outline(
     title: {
-      text(font: fonts.body, 1.5em, weight: 700, "Contents")
+      text(font: fonts.body, 1.5em, weight: 700, tr(lang, "contents"))
       v(15mm)
     },
     indent: 2em
@@ -176,7 +196,7 @@
 
   // List of figures.
   pagebreak()
-  heading(numbering: none)[List of Figures]
+  heading(numbering: none, tr(lang, "list-of-figures"))
   show outline: it => { // Show only the short caption here
     in-outline.update(true)
     it
@@ -191,7 +211,7 @@
   context[
     #if query(figure.where(kind: table)).len() > 0 {
       pagebreak()
-      heading(numbering: none)[List of Tables]
+      heading(numbering: none, tr(lang, "list-of-tables"))
       outline(
         title: "",
         target: figure.where(kind: table)
@@ -201,9 +221,9 @@
 
   // Appendix.
   pagebreak()
-  heading(numbering: none)[Appendix A: Supplementary Material]
+  heading(numbering: none, tr(lang, "appendix"))
   include("/layout/appendix.typ")
 
   pagebreak()
-  bibliography("/thesis.yml")
+  bibliography("/thesis.yml", title: tr(lang, "bibliography"))
 }

@@ -1,4 +1,10 @@
 // Enter your thesis data here:
+// Language of the thesis: "en" (English) or "el" (Greek). It sets the
+// hyphenation, the quotation marks and the labels (Chapter/Κεφάλαιο,
+// Figure/Σχήμα, Table/Πίνακας, Contents/Περιεχόμενα ...), and the cover,
+// title page and copyright page. With "el" the cover shows titleGreek;
+// write the names, division and location below in the same language.
+#let language = "en"
 #let titleEnglish = "Your Thesis Title Here"
 #let titleGreek = "Ο Τίτλος της Διπλωματικής σας Εργασίας"
 #let degree = "Master"

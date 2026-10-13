@@ -1,6 +1,6 @@
 #import "/layout/fonts.typ": *
 
-#let acknowledgement(body) = {
+#let acknowledgement(body, title: "Acknowledgements") = {
   set page(
     margin: (left: 30mm, right: 30mm, top: 40mm, bottom: 40mm),
     numbering: none,
@@ -19,7 +19,7 @@
   )
 
   // --- Acknowledgements ---
-  align(left, text(font: fonts.sans, 2em, weight: 700, "Acknowledgements"))
+  align(left, text(font: fonts.sans, 2em, weight: 700, title))
   v(15mm)
 
   body

@@ -1,4 +1,5 @@
 #import "/layout/fonts.typ": *
+#import "/layout/i18n.typ": *
 
 #let cover(
   title: "",
@@ -9,6 +10,7 @@
   supervisors: (),
   submissionDate: none,
   city: "Athens",
+  lang: "en",
 ) = {
   set page(
     margin: (left: 25mm, right: 25mm, top: 20mm, bottom: 25mm),
@@ -19,7 +21,7 @@
   set text(
     font: fonts.body, 
     size: 11pt, 
-    lang: "en"
+    lang: lang
   )
   
   set par(leading: 1em)
@@ -34,11 +36,11 @@
     align(center, image("/figures/ntua_logo.svg", width: 30mm)),
     align(left + horizon, block(width: 100%)[
       #set text(top-edge: 2pt)
-      #text(font: fonts.sans, size: 12pt, "National Technical University of Athens")
+      #text(font: fonts.sans, size: 12pt, tr(lang, "university"))
       
-      #text(font: fonts.sans, size: 12pt, "School of Electrical and Computer Engineering")
+      #text(font: fonts.sans, size: 12pt, tr(lang, "school"))
       
-      #text(size: 12pt, "Division: " + division)
+      #text(size: 12pt, tr(lang, "division-prefix") + division)
     ])
   )
 
@@ -50,7 +52,7 @@
   v(10mm)
 
   // Degree label and Thesis Title
-  align(center, text(font: fonts.sans, size: 16pt, weight: 700, "Diploma Thesis"))
+  align(center, text(font: fonts.sans, size: 16pt, weight: 700, tr(lang, "thesis")))
   
   v(10mm)
 
@@ -66,7 +68,7 @@
       columns: (auto, 1fr),
       column-gutter: 0.3em,
       row-gutter: 0.9em,
-      text(size: 12pt, "Supervisor: "),
+      text(size: 12pt, tr(lang, "supervisor")),
       text(size: 12pt, supervisor.at("name", default: "Full Name") + ","),
       [],
       text(size: 12pt, supervisor.at("status", default: "Status, University"))
@@ -75,6 +77,5 @@
 
   v(25mm)
 
-  let dateStr = if submissionDate != none { submissionDate.display("[month repr:long] [year]") } else { "Month Year" }
-  align(center, text(size: 11pt, city + ", " + dateStr))
+  align(center, text(size: 11pt, city + ", " + month-year(submissionDate, lang)))
 }
