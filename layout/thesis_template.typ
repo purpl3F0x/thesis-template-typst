@@ -183,7 +183,7 @@
     in-outline.update(false)
   }
   outline(
-    title:"",
+    title: none,
     target: figure.where(kind: image),
   )
 
@@ -193,7 +193,7 @@
       pagebreak()
       heading(numbering: none)[List of Tables]
       outline(
-        title: "",
+        title: none,
         target: figure.where(kind: table)
       )
     }
