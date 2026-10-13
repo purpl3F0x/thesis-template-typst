@@ -53,7 +53,6 @@ jobs:
       - uses: typst-community/setup-typst@v4
       - run: typst compile thesis.typ thesis.pdf
       - run: typst compile proposal.typ proposal.pdf
-      - run: typst compile registration_certificate.typ registration_certificate.pdf
       - run: typst compile feedbacklog.typ feedbacklog.pdf
 
       - name: Create Release
@@ -67,5 +66,4 @@ jobs:
           files: |
             thesis.pdf
             proposal.pdf
-            registration_certificate.pdf
             feedbacklog.pdf
