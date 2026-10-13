@@ -61,6 +61,9 @@ For the actual content of your thesis, there is a dedicated folder named [`/cont
 You can add or remove chapters as needed (adapt the [`thesis.typ`](/thesis.typ) with the `#include(...)` accordingly).
 If you need to customize the layout of the template, you can do so by modifying the corresponding file in the [`layout`](/layout) directory.
 
+### Equations, matrices and tables
+[`math_examples.typ`](/math_examples.typ) is a separate document with examples of equations, symbols, alignment, matrices, tables, and of variables and functions that build them. Each example shows its code and the result. Compile it with `typst compile math_examples.typ` and copy what you need into your thesis.
+
 
 
 ### Build PDFs locally 
