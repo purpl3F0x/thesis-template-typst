@@ -94,6 +94,9 @@
   )
   
   show math.equation: set text(weight: 400)
+  // Number display equations per chapter, e.g. (2.1), so that they can be
+  // referenced with @label. The counter restarts at every chapter (below).
+  set math.equation(numbering: n => numbering("(1.1)", counter(heading).get().first(), n))
 
   // --- Headings ---
   show heading: set block(below: 0.85em, above: 1.75em)
@@ -167,9 +170,10 @@
   counter(page).update(1)
   set par(justify: true, first-line-indent: 2em)
 
-  // Start each chapter on a new page
+  // Start each chapter on a new page and restart the equation numbers
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
+    counter(math.equation).update(0)
     it
   }
   body
