@@ -2,7 +2,6 @@
 #import "/layout/titlepage.typ": *
 #import "/layout/disclaimer.typ": *
 #import "/layout/acknowledgement.typ": acknowledgement as acknowledgement_layout
-#import "/layout/transparency_ai_tools.typ": transparency_ai_tools as transparency_ai_tools_layout
 #import "/layout/abstract.typ": *
 #import "/utils/print_page_break.typ": *
 #import "/layout/fonts.typ": *
@@ -21,8 +20,10 @@
   submissionDate: none,
   abstract_en: "",
   abstract_el: "",
+  keywords_en: (),
+  keywords_el: (),
+  extended_abstract_el: none,
   acknowledgement: "",
-  transparency_ai_tools: "",
   is_print: false,
   division: "",
   committee: (),
@@ -70,16 +71,17 @@
     author: author,
     submissionDate: submissionDate
   )
-  transparency_ai_tools_layout(transparency_ai_tools)
 
   print_page_break(print: is_print)
-  
+
+  abstract(lang: "en", keywords: keywords_en)[#abstract_en]
+  print_page_break(print: is_print)
+  abstract(lang: "el", keywords: keywords_el)[#abstract_el]
+  print_page_break(print: is_print)
+
   acknowledgement_layout(acknowledgement)
 
   print_page_break(print: is_print)
-
-  abstract(lang: "en")[#abstract_en]
-  abstract(lang: "el")[#abstract_el]
 
   set page(
     margin: (left: 30mm, right: 30mm, top: 40mm, bottom: 40mm),
@@ -137,7 +139,7 @@
   set par(leading: 1em)
 
   // --- Citations ---
-  set cite(style: "alphanumeric")
+  set bibliography(style: "ieee")
 
   // --- Figures ---
   show figure: set text(size: 0.85em)
@@ -172,6 +174,17 @@
     pagebreak(weak: true)
     it
   }
+
+  // Greek extended abstract as Chapter 0
+  if extended_abstract_el != none {
+    {
+      set text(lang: "el")
+      set heading(numbering: (..nums) => numbering("1.1", nums.pos().first() - 1, ..nums.pos().slice(1)))
+      extended_abstract_el
+    }
+    counter(heading).update(0)
+  }
+
   body
 
   // List of figures.
@@ -183,7 +196,7 @@
     in-outline.update(false)
   }
   outline(
-    title:"",
+    title: none,
     target: figure.where(kind: image),
   )
 
@@ -193,7 +206,7 @@
       pagebreak()
       heading(numbering: none)[List of Tables]
       outline(
-        title: "",
+        title: none,
         target: figure.where(kind: table)
       )
     }

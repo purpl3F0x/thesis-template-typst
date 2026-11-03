@@ -1,7 +1,7 @@
 #import "/layout/thesis_template.typ": *
 #import "/metadata.typ": *
 
-#set document(title: titleEnglish, author: author)
+#set document(title: titleEnglish, author: author, keywords: keywordsEnglish)
 
 #show: thesis.with(
   title: titleEnglish,
@@ -13,10 +13,13 @@
   author: author,
   startDate: startDate,
   submissionDate: submissionDate,
+  is_print: true,
   abstract_en: include "/content/abstract_en.typ",
   abstract_el: include "/content/abstract_el.typ",
+  keywords_en: keywordsEnglish,
+  keywords_el: keywordsGreek,
+  extended_abstract_el: include "/content/extended_abstract_el.typ",
   acknowledgement: include "/content/acknowledgement.typ",
-  transparency_ai_tools: include "/content/transparency_ai_tools.typ",
   division: division,
   committee: committee,
   city: location,

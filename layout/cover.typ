@@ -42,22 +42,22 @@
     ])
   )
 
-  v(25mm)
+  v(30mm)
 
   // Title of Thesis label
-  align(center, text(font: fonts.sans, weight: 700, size: 16pt, underline(title)))
+  align(center, text(font: fonts.sans, weight: 700, size: 18pt, underline(title)))
   
-  v(10mm)
+  v(15mm)
 
   // Degree label and Thesis Title
-  align(center, text(font: fonts.sans, size: 16pt, weight: 700, "Diploma Thesis"))
+  align(center, text(font: fonts.sans, size: 18pt, weight: 700, "Diploma Thesis"))
   
-  v(10mm)
+  v(15mm)
 
   // Author label and name
-  align(center, text(font: fonts.sans, weight: 400, size: 14pt, underline(author)))
+  align(center, text(font: fonts.sans, weight: 400, size: 16pt, underline(author)))
   
-  v(25mm)
+  v(30mm)
 
   // Supervisor section
   if supervisors.len() > 0 {
@@ -76,5 +76,5 @@
   v(25mm)
 
   let dateStr = if submissionDate != none { submissionDate.display("[month repr:long] [year]") } else { "Month Year" }
-  align(center, text(size: 11pt, city + ", " + dateStr))
+  align(center, text(size: 12pt, city + ", " + dateStr))
 }

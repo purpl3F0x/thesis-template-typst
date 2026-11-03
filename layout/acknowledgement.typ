@@ -10,7 +10,7 @@
   set text(
     font: fonts.body,
     size: 12pt,
-    lang: "el",
+    lang: "en",
   )
 
   set par(

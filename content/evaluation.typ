@@ -1,4 +1,6 @@
 #import "/utils/todo.typ": TODO
+#import "/utils/diagram.typ": diagram
+#import "@preview/lilaq:0.6.0" as lq
 
 = Case Study / Evaluation
 #TODO[
@@ -19,6 +21,23 @@
 #TODO[
   Summarize the most interesting results of your evaluation (without interpretation). Additional results can be put into the appendix.
 ]
+
+@fig:example-plot shows an example plot created with Lilaq.
+
+#let users = lq.linspace(0, 100, num: 21)
+#diagram(
+  lq.diagram(
+    width: 11cm,
+    height: 6.5cm,
+    xlabel: [Concurrent users],
+    ylabel: [Response time (ms)],
+    legend: (position: top + left),
+    lq.plot(users, users.map(u => 20 + 0.012 * u * u), label: [Baseline]),
+    lq.plot(users, users.map(u => 18 + 0.4 * u), label: [Proposed system]),
+  ),
+  caption: [Example plot: response time of the baseline and the proposed system under increasing load.],
+  short-caption: [Example plot: response time under load],
+) <fig:example-plot>
 
 == Findings
 #TODO[
