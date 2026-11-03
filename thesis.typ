@@ -11,7 +11,6 @@
   examiner: examiner,
   supervisors: supervisors,
   author: author,
-  startDate: startDate,
   submissionDate: submissionDate,
   is_print: true,
   abstract_en: include "/content/abstract_en.typ",

@@ -15,6 +15,5 @@
   (name: "Committee Member 3", status: "Assistant Professor, NTUA"),
 )
 #let location = "Athens"
-#let startDate = datetime(day: 1, month: 9, year: 2024)
 #let submissionDate = datetime(day: 1, month: 1, year: 2025)
 #let feedbacklogSubmissionDate = datetime.today()

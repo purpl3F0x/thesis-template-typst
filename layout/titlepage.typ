@@ -8,7 +8,6 @@
   examiner: "",
   supervisors: (),
   author: "",
-  startDate: none,
   submissionDate: none,
   division: "Division",
   committee: (),
