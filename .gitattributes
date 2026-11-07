@@ -3,3 +3,6 @@
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
 *.svg filter=lfs diff=lfs merge=lfs -text
+# The logo is needed to compile, so it is kept out of LFS: GitHub ZIP downloads
+# and uploads to typst.app then contain the file itself, not the LFS pointer.
+figures/ntua_logo.svg !filter !diff !merge text
